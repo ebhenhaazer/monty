@@ -1,37 +1,53 @@
 #include "monty.h"
 
 /**
- * op_push - push value to stack
- * @stack: pointer to stack
- * @line_number: unused
+ * push - pushes an element to the stack.
+ * @stack: the stack
+ * @line_number: the current line number
+ *
+ * Return: void
  */
-void op_push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new = malloc(sizeof(stack_t));
+	stack_t *new, *tmp;
+	char *push_arg = strtok(NULL, "\n \t");
+	int pVal;
+	/*if push, tests if the push_arg was valid or not */
+	if (!is_int(push_arg))
+	{
+		fprintf(stdout, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 
+
+	pVal = atoi(push_arg);
+	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
 		fprintf(stdout, "Error: malloc failed\n");
-		gvars.ret_val = -1;
-		return;
+		exit(EXIT_FAILURE);
 	}
-	if (gvars.value == NULL || check_val(gvars.value) == -1)
-	{
-		fprintf(stdout, "L%d: usage: push integer\n", line_number);
-		free(new);
-		gvars.ret_val = -1;
-		return;
-	}
-
-	gvars.int_val = atoi(gvars.value);
-	new->n = gvars.int_val;
+	new->n = pVal;
 	new->prev = NULL;
-
-	if (*stack == NULL)
-		new->next = NULL;
-	else
+	new->next = NULL;
+	/** checks if stack is empty **/
+	if ((*stack) == NULL)
+		*stack = new;
+	else if (SQ)
+	{
+		/** puts new node on top if not empty **/
+		(*stack)->prev = new;
 		new->next = *stack;
-	if (new->next != NULL)
-		new->next->prev = new;
-	*stack = new;
+		*stack = new;
+	}
+	else
+	{
+		/**puts new node on the bottom **/
+		tmp = *stack;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->prev = tmp;
+	}
+
 }

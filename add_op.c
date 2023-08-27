@@ -1,31 +1,24 @@
 #include "monty.h"
 
 /**
- * op_add - function to add top two elements of a stack
- * @stack: double pointer of stack_t type to head of stack
- * @line_number: unsigned int type
- * Return: stack with new sum and removed node
+ * add - adds the top two elements of the stack.
+ * @stack: the stack
+ * @line_number: the current line number
  *
+ * Return: void
  */
-void op_add(stack_t **stack, unsigned int line_number)
+void add(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
-	int len = 0;
+	int summ;
 
-	len = list_len(stack);
-	if (len < 2 || stack == NULL || *stack == NULL)
+	if ((*stack) == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stdout, "L%d: can't add, stack too short\n",
-			line_number);
-		gvars.ret_val = -1;
-		return;
+		fprintf(stdout, "L%d: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		temp = *stack;
-		temp->next->n += temp->n;
-		temp->next->prev = NULL;
-		*stack = temp->next;
-		free(temp);
-	}
+
+	summ = (*stack)->next->n + (*stack)->n;
+	pop(stack, line_number);
+	(*stack)->n = summ;
+
 }

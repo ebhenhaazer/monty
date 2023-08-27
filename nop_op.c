@@ -1,13 +1,15 @@
 #include "monty.h"
 
 /**
- * op_nop - does nothing
- * @stack: pointer to pointer
- * @line_number: line number
+ * nop - The opcode nop doesn’t do anything.
+ * @stack: the stack
+ * @line_number: the current line number
+ *
+ * Return: void
  */
-
-void op_nop(stack_t **stack, unsigned int line_number)
+void nop(stack_t **stack, unsigned int line_number)
 {
 	UNUSED(stack);
 	UNUSED(line_number);
+
 }

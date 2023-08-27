@@ -1,19 +1,23 @@
 #include "monty.h"
 
 /**
- * op_pall - function to print all elements in a stack
- * @stack: double pointer of type stack_t to head of doubly linked list
- * @line_number: unsigned int for line number(void in this function)
- * Return: no return, print list
+ * pall - prints all values on the stack, starting from the top of the stack.
+ * @stack: the stack
+ * @line_number: the current line number
+ *
+ * Return: void
  */
-void op_pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t *current;
+	stack_t *tmp;
 
-	current = *stack;
-	while (current != NULL)
+	UNUSED(line_number);
+
+	tmp = *stack;
+	while (tmp != NULL)
 	{
-		printf("%d\n", current->n);
-		current = current->next;
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
 	}
+
 }
