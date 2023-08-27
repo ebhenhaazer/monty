@@ -42,7 +42,7 @@ instruction_t *parse_line(char *line)
 			instruction->f = nop;
 		if (strcmp(instruction->opcode, "sub") == 0)
 			instruction->f = sub;
-		if (strcmp(instruction->opcode, "div") == 0)
+		/*if (strcmp(instruction->opcode, "div") == 0)
 			instruction->f = divide;
 		if (strcmp(instruction->opcode, "mul") == 0)
 			instruction->f = multiply;
@@ -55,7 +55,7 @@ instruction_t *parse_line(char *line)
 		if (strcmp(instruction->opcode, "rotl") == 0)
 			instruction->f = rotl;
 		if (strcmp(instruction->opcode, "rotr") == 0)
-			instruction->f = rotr;
+			instruction->f = rotr;*/
 		if (strcmp(instruction->opcode, "stack") == 0)
 			instruction->f = stack;
 		if (strcmp(instruction->opcode, "queue") == 0)
